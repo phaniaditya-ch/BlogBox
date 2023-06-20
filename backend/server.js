@@ -17,7 +17,7 @@ app.use(cors());
 
 mongoose
   .connect(dbURI)
-  .then((result) => app.listen(6969, () => {console.log('listening to 6969 port for requests: ')}))
+  .then((result) => app.listen(3000, () => {console.log('listening to 6969 port for requests: ')}))
   .catch((err) => console.log(err));
 
 
