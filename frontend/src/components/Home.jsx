@@ -22,12 +22,19 @@ function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCards([...cards, { title: e.target.title.value, desc: e.target.description.value }])
+    setCards([...cards, { title: e.target.title.value, desc: e.target.description.value }])    // -- tbc
     const urlTitle = e.target.elements.title.value;
     const urlDesc = e.target.description.value;
-    const encodedUrlDesc = encodeURIComponent(urlDesc);
-    const url = `http://localhost:6969/add-blog/${urlTitle}/${encodedUrlDesc}`;
-    fetch(url)
+    // const encodedUrlDesc = encodeURIComponent(urlDesc);
+    const url = `http://localhost:6969/add-blog/`//${urlTitle}/${encodedUrlDesc}`;
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: urlTitle, 
+        desc: urlDesc, 
+      })
+    })
       .then((result) => {
         if (result.ok)
           result.json()
@@ -71,7 +78,7 @@ function Home() {
         </div>
       </div>
       <div>
-            <Footer />
+        <Footer />
       </div>
     </div>
   )

@@ -8,6 +8,7 @@ const cors = require('cors');
 const querystring = require('querystring');
 
 const app = express();
+app.use(express.json());
 
 const dbURI = 'mongodb+srv://phaniaditya_ch:phani1234@cluster0.senx8yw.mongodb.net/blogbox?retryWrites=true&w=majority';
 
@@ -25,10 +26,12 @@ app.get('/', (req, res) => {
     res.send('<h1>homepage</h1>');
 })
 
-app.get('/add-blog/:title/:desc', (req, res) => {
+app.post('/add-blog', (req, res) => {
+  const list = req.body
+  console.log('this is req.body: ', list);
   const blog = new Blog({
-    title: req.params.title,
-    description: req.params.desc
+    title: list.title,
+    description: list.desc
   })
 
   console.log(req.params);
